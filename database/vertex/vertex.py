@@ -12,12 +12,12 @@ class VertexDatabase:
         logging.basicConfig(level=logging.DEBUG,
                             format='%(asctime)s %(levelname)-8s %(message)s',
                             datefmt='%a, %d %b %Y %H:%M:%S',
-                            filename=r'C:\LogPython\DB',
+                            filename=r'C:\LogPython\VertexDB.log',
                             filemode='w')
         logger = logging.getLogger(__name__)
         logger.setLevel(logging.DEBUG)
         log_handler = logging.FileHandler(
-            r'C:\LogPython\DB', 'w', 'utf-8')
+            r'C:\LogPython\VertexDB.log', 'w', 'utf-8')
         log_handler.setLevel(logging.DEBUG)
         logging.info('Started at class VertexDatabase')
 
@@ -35,7 +35,10 @@ class VertexDatabase:
         logging.info('Connected to database Vertex --> %s', got_connection)
 
     def database_connection(self):
-        """connect to database via parameters in configuration from imported setup_File """
+        """
+        Connect to database via prameters in configuration from imported setup_File
+        :return: database_cursor of database
+        """
         try:
             if config_variable.get("db_server") and config_variable.get("db_username") and config_variable.get("db_password"):
                 db_connection = pyodbc.connect("DRIVER={{SQL Server}};SERVER={0}; database={1}; "
@@ -57,9 +60,6 @@ class VertexDatabase:
                 'Cannot setup database connection to Vertex\n %s', E.message) 
         return None
 
-        # self.db_connection = pyodbc.connect("DRIVER={{SQL Server}};SERVER={0}; database={1}; "
-        #                                         "trusted_connection=yes;UID={2};PWD={3}".format(
-        #         config_variable.get("db_server"), database, config_variable.get("db_username"), config_variable.get("db_password")))
 
     def __del__(self):
         """ destructor"""
@@ -67,35 +67,35 @@ class VertexDatabase:
         print "Closed"
 
     def execute_sql_query(self, sql_query):
-        """ query database and getch entire table for now """
+        """
+        Query database and fetch data
+        :param sql_query: Sql text query
+        :return: data
+        """
         try:
             if not self.cursor:
                 self.cursor = self.database_connection()
 
             self.cursor.execute(sql_query)
-            # for row in self.cursor:
-            #     print (row)
-            #     return row
             data = self.cursor.fetchall()
-            for row in data:
-                print row
+            return data
         except Exception as E:
             logging.warning(
-                'Problem with objects\'s cursor in execute query \n %s', E.message)
-            print E
+                'Problem with Vertex database database_cursor in execute query \n %s', E.message)
+            return None
 
 
-def main():
-
-    vertex_db = VertexDatabase()
-    sql_query = r"SELECT * FROM [Vertex].[dbo].[Config]"
-    # print(config_variable.get("db_password"))
-
-    # print'Printing\n{}'.format(vertex_db.execute_sql_query(sql_query))
-    vertex_db.execute_sql_query(sql_query)
-
-    print 'bye'
-
-
-if __name__ == "__main__":
-    main()
+# def main():
+#
+#     vertex_db = VertexDatabase()
+#     sql_query = r"SELECT * FROM [Vertex].[dbo].[Config]"
+#     # print(config_variable.get("db_password"))
+#
+#     # print'Printing\n{}'.format(vertex_db.execute_sql_query(sql_query))
+#     vertex_db.execute_sql_query(sql_query)
+#
+#     print 'bye'
+#
+#
+# if __name__ == "__main__":
+#     main()

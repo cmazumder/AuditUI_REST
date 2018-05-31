@@ -8,16 +8,18 @@ class VertexArchDatabase:
     cursor = None
 
     def __init__(self):
-        """ constructor"""
+        """
+        constructor
+        """
         logging.basicConfig(level=logging.DEBUG,
                             format='%(asctime)s %(levelname)-8s %(message)s',
                             datefmt='%a, %d %b %Y %H:%M:%S',
-                            filename=r'C:\LogPython\DB.log',
+                            filename=r'C:\LogPython\VertexArchDB.log',
                             filemode='w')
         logger = logging.getLogger(__name__)
         logger.setLevel(logging.DEBUG)
         log_handler = logging.FileHandler(
-            r'C:\LogPython\DB.log', 'w', 'utf-8')
+            r'C:\LogPython\VertexArchDB.log', 'w', 'utf-8')
         log_handler.setLevel(logging.DEBUG)
         logging.info('Started at class VertexArchDatabase')
 
@@ -35,7 +37,10 @@ class VertexArchDatabase:
         logging.info('Connected to database VertexArch --> %s', got_connection)
 
     def database_connection(self):
-        """connect to database via parameters in configuration from imported setup_File """
+        """
+        connect to database via parameters in configuration from imported setup_File
+        :return: database_cursor to the database
+        """
         try:
             if config_variable.get("db_server") and config_variable.get("db_username") and config_variable.get("db_password"):
                 db_connection = pyodbc.connect("DRIVER={{SQL Server}};SERVER={0}; database={1}; "
@@ -67,35 +72,37 @@ class VertexArchDatabase:
         print "Closed"
 
     def execute_sql_query(self, sql_query):
-        """ query database and getch entire table for now """
+        """
+        Query database and fetch data
+        :param sql_query: Sql text query
+        :return: data
+        """
+
         try:
             if not self.cursor:
                 self.cursor = self.database_connection()
 
             self.cursor.execute(sql_query)
-            # for row in self.cursor:
-            #     print (row)
-            #     return row
             data = self.cursor.fetchall()
-            for row in data:
-                print row
+            return data
         except Exception as E:
             logging.warning(
-                'Problem with objects\'s cursor in execute query \n %s', E.message)
+                'Problem with objects\'s database_cursor in execute query \n %s', E.message)
             print E
+            return None
 
 
-def main():
-
-    vertexArch_db = VertexArchDatabase()
-    sql_query = r"SELECT * FROM [VertexArch].[Archive].[AuditDetail]"
-    # print(config_variable.get("db_password"))
-
-    # print'Printing\n{}'.format(vertexArch_db.execute_sql_query(sql_query))
-    vertexArch_db.execute_sql_query(sql_query)
-
-    print 'bye'
-
-
-if __name__ == "__main__":
-    main()
+# def main():
+#
+#     vertexArch_db = VertexArchDatabase()
+#     sql_query = r"SELECT * FROM [VertexArch].[Archive].[AuditDetail]"
+#     # print(config_variable.get("db_password"))
+#
+#     # print'Printing\n{}'.format(vertexArch_db.execute_sql_query(sql_query))
+#     vertexArch_db.execute_sql_query(sql_query)
+#
+#     print 'bye'
+#
+#
+# if __name__ == "__main__":
+#     main()
