@@ -1,5 +1,6 @@
 from database.misc.misc import MiscDatabase as misc_database_class
-from test.testTask import testTask as Test
+from database.vertex.vertex import VertexDatabase as vertex_database_class
+from test.test_step import testTask as Test
 import logging
 import sys
 
@@ -10,6 +11,7 @@ class AuditUI_TestSuite:
     total_test_fail = 0
     total_test_blocked = 0
     misc_db = None
+    vertex_db = None
 
     def __init__(self):
         logging.basicConfig(level=logging.DEBUG,
@@ -20,6 +22,7 @@ class AuditUI_TestSuite:
         logging.info('Test Suite: Audit UI')
 
         self.misc_db = misc_database_class()
+        self.vertex_db = vertex_database_class()
 
     def update_test_result(self, returned_result, test_name):
         """
@@ -40,13 +43,9 @@ class AuditUI_TestSuite:
 
     def test_dashboard_Manufacture_Code(self, api_action_address):
         """
-
-        :param api_action_address:
-        :param db_object:
-        :param table:
-        :param datapoint_field:
-        :param datapoint_value_field:
-        :return:
+        Test Dashboard > Manufacture Code
+        :param api_action_address: api address for test case
+        :return: Nothing
         """
 
         logging.info('#####################################')
@@ -59,20 +58,16 @@ class AuditUI_TestSuite:
 
         execution_status = Test.execute_test_steps(api_action_address=api_action_address, database_object=self.misc_db,
                                                    table='Component', test_sql_query=make_query, api_datapoint_value_toSearch='ManufacturerIdentifier',
-                                                   api_datapoint_key_toGet='ComponentValue', testname=this_function_name)
+                                                   api_datapoint_key_toGet='ComponentValue', test_name=this_function_name)
 
         self.update_test_result(
             returned_result=execution_status, test_name=this_function_name)
 
     def test_dashboard_GMID(self, api_action_address):
         """
-
-        :param api_action_address:
-        :param db_object:
-        :param table:
-        :param datapoint_field:
-        :param datapoint_value_field:
-        :return:
+        Test Dashboard > GMID
+        :param api_action_address: api address for test case
+        :return: Nothing
         """
         logging.info('#####################################')
         self.total_test_run += 1
@@ -83,31 +78,47 @@ class AuditUI_TestSuite:
 
         execution_status = Test.execute_test_steps(api_action_address=api_action_address, database_object=self.misc_db,
                                                    table='Component', test_sql_query=make_query, api_datapoint_value_toSearch='ControllerGMID',
-                                                   api_datapoint_key_toGet='ComponentValue', testname=this_function_name)
+                                                   api_datapoint_key_toGet='ComponentValue', test_name=this_function_name)
 
         self.update_test_result(
             returned_result=execution_status, test_name=this_function_name)
 
     def test_dashboard_Supported_Levels(self, api_action_address):
         """
-
-        :param api_action_address:
-        :param db_object:
-        :param table:
-        :param datapoint_field:
-        :param datapoint_value_field:
-        :return:
+        Test Dashboard > Supported Levels
+        NOTE: This test is specifically written to fail
+        :param api_action_address: api address for test case
+        :return: Nothing
         """
         logging.info('#####################################')
         self.total_test_run += 1
         this_function_name = sys._getframe().f_code.co_name
         logging.info('Runing pre-req check for %s', this_function_name)
 
-        make_query = r"SELECT ComponentValue FROM [Misc].[dbo].[Component] WHERE ComponentID = 'LevelCountLimit'"
+        make_query = r"SELECT ConfigID FROM [Vertex].[dbo].[Config] WHERE ConfigID='LevelCountLimit'"
 
         execution_status = Test.execute_test_steps(api_action_address=api_action_address, database_object=self.misc_db,
                                                    table='Component', test_sql_query=make_query, api_datapoint_value_toSearch='LevelCountLimit',
-                                                   api_datapoint_key_toGet='Value', testname=this_function_name)
+                                                   api_datapoint_key_toGet='Value', test_name=this_function_name)
+
+        self.update_test_result(
+            returned_result=execution_status, test_name=this_function_name)
+
+    def test_dashboard_CCCE_Limit(self, api_action_address):
+        """
+        Test Dashboard > CCCE
+        NOTE: This test is specifically written to fail pre-req and be blocked
+        :param api_action_address: api address for test case
+        :return: Nothing
+        """
+        logging.info('#####################################')
+        self.total_test_run += 1
+        this_function_name = sys._getframe().f_code.co_name
+        make_query = r"SELECT ConfigValue FROM [Vertex].[dbo].[Config] WHERE ConfigID='CCCETransferLimit'"
+
+        execution_status = Test.execute_test_steps(api_action_address=api_action_address, database_object=self.vertex_db,
+                                                   table='Config', test_sql_query=make_query, api_datapoint_value_toSearch='CCCETransferLimit',
+                                                   api_datapoint_key_toGet='Value', test_name=this_function_name)
 
         self.update_test_result(
             returned_result=execution_status, test_name=this_function_name)
