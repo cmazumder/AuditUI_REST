@@ -33,7 +33,8 @@ class MiscDatabase:
         logging.info('Creating database connection to %s at server %s',
                      'Misc', config_variable.get("db_server"))
         self.database_connection()
-        logging.info('Connected to database Misc; Cursor --> %s', self.database_misc)
+        logging.info('Connected to database Misc; Cursor --> %s',
+                     self.database_misc)
 
     def database_connection(self):
         """
@@ -43,9 +44,9 @@ class MiscDatabase:
         try:
             if config_variable.get("db_server") and config_variable.get("db_username") and config_variable.get("db_password"):
                 connection_string = r"DRIVER={{SQL Server}};SERVER={0}; database={1}; trusted_connection=yes;UID={2};PWD={3}".format(
-                                                   config_variable.get("db_server"), 'Misc',
-                                                   config_variable.get("db_username"),
-                                                    config_variable.get("db_password"))
+                    config_variable.get("db_server"), 'Misc',
+                    config_variable.get("db_username"),
+                    config_variable.get("db_password"))
 
                 self.database_misc = pyodbc.connect(connection_string)
 
@@ -59,7 +60,7 @@ class MiscDatabase:
                     'Cannot setup database connection to Misc\n Missing parameter in Setup_File')
         except pyodbc.Error as E:
             logging.warning(
-                'Cannot setup database connection to Misc\n %s', E.message) 
+                'Cannot setup database connection to Misc\n %s', E.message)
         return None
 
         # self.db_connection = pyodbc.connect("DRIVER={{SQL Server}};SERVER={0}; database={1}; "
@@ -82,16 +83,14 @@ class MiscDatabase:
 
         try:
             if self.database_misc:
-                cursor = self.database_misc.cursor()
-                print "@@@@@@@@@@@@\nCursor ---> {0}\ndatabase_misc_cursor ---> {1}\n@@@@@@@@@@@@\n".format(cursor,
-                                                                                                            self.database_misc_cursor)
                 self.database_misc_cursor.execute(sql_query)
-
-                data = self.cursor.fetchall()
-                return data
+                data = self.database_misc_cursor.fetchall()
+                result_list = [x[0] for x in data]
+                if result_list:
+                    return result_list
         except pyodbc.Error as E:
             logging.warning(
-                'Problem with objects\'s database_cursor in execute query \n %s', E.message)
+                'Problem with objects\'s database_cursor in execute query \n %s', E.args)
         return None
 
 

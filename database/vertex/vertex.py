@@ -57,9 +57,8 @@ class VertexDatabase:
                     'Cannot setup database connection to Vertex\n Missing parameter in Setup_File')
         except pyodbc.Error as E:
             logging.warning(
-                'Cannot setup database connection to Vertex\n %s', E.message) 
+                'Cannot setup database connection to Vertex\n %s', E.message)
         return None
-
 
     def __del__(self):
         """ destructor"""

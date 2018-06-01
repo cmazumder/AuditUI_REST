@@ -43,27 +43,20 @@ def get_api_json_response(api_action_address):
     return None
 
 
-def get_api_datapoint_value(api_action_address, api_datapoint_key, api_datapoint_value, api_key_toFetch=None):
+def get_api_datapoint_value(api_action_address, api_datapoint_value_toSearch, api_datapoint_key_toGet, api_key_toFetch=None):
     """
     Extract the value from the api response given the datapoint
     :param api_action_address: url to api
-    :param api_datapoint_key: to denote the api tag lookup value
-    :param api_datapoint_value: to denote the api tag containing the value of api_datapoint_key
+    :param api_datapoint_value_toSearch: to denote the api tag lookup value
+    :param api_datapoint_key_toGet: to denote the api tag containing the value of api_datapoint_value_toSearch
     :param api_key_toFetch: Furture use, and unused for now
     :return: value of the api data point
     """
     api_response = get_api_json_response(api_action_address=api_action_address)
     if api_response:
         for item in api_response:
-            if api_datapoint_key in item.values():
-                if api_datapoint_value in item.values():
-                    return item.get(api_datapoint_value)
-                else:
-                    logging.warning('Cannot find value %s in URL %s\n',
-                                    api_datapoint_value, api_action_address)
-            else:
-                logging.warning('Cannot find key %s in URL %s\n',
-                                api_datapoint_key, api_action_address)
+            if api_datapoint_value_toSearch in item.values():
+                return item.get(api_datapoint_key_toGet)
     return None
 
 
