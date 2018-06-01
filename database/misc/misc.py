@@ -10,16 +10,6 @@ class MiscDatabase:
 
     def __init__(self):
         """ constructor"""
-        # logging.basicConfig(level=logging.DEBUG,
-        #                     format='%(asctime)s %(levelname)-8s %(message)s',
-        #                     datefmt='%a, %d %b %Y %H:%M:%S',
-        #                     filename=r'C:\LogPython\MiscDB.log',
-        #                     filemode='w')
-        # logger = logging.getLogger(__name__)
-        # logger.setLevel(logging.DEBUG)
-        # log_handler = logging.FileHandler(
-        #     r'C:\LogPython\MiscDB.log', 'w', 'utf-8')
-        # log_handler.setLevel(logging.DEBUG)
         logging.info('Started at class MiscDatabase')
 
         """
@@ -59,20 +49,15 @@ class MiscDatabase:
                 logging.warning(
                     'Cannot setup database connection to Misc\n Missing parameter in Setup_File')
         except pyodbc.Error as E:
-            logging.warning(
+            logging.error(
                 'Cannot setup database connection to Misc\n %s', E.message)
         return None
-
-        # self.db_connection = pyodbc.connect("DRIVER={{SQL Server}};SERVER={0}; database={1}; "
-        #                                         "trusted_connection=yes;UID={2};PWD={3}".format(
-        #         config_variable.get("db_server"), database, config_variable.get("db_username"), config_variable.get("db_password")))
 
     def __del__(self):
         """ destructor"""
         logging.warning(
             'Destroy Misc --> %s', self.database_misc)
         self.database_misc.close()
-        print "Closed"
 
     def execute_sql_query(self, sql_query):
         """
@@ -89,7 +74,7 @@ class MiscDatabase:
                 if result_list:
                     return result_list
         except pyodbc.Error as E:
-            logging.warning(
+            logging.error(
                 'Problem with objects\'s database_cursor in execute query \n %s', E.args)
         return None
 
