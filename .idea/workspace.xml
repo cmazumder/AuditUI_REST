@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec2cbb6f-e5a0-44a8-88d8-a6b99781ffaa" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/api/webInteraction/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/api/webInteraction/connect.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -562,7 +560,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528195616176</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Refactored Vertex and VertexArch. Moved webInteraction out of api with &#10;a new name">
+      <created>1528195926130</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1528195926130</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TestHistory">
