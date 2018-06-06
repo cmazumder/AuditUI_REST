@@ -1,10 +1,13 @@
-import database.misc.misc as misc
-import api.util as api_util
 import logging
-import sys
+
+import api.util as api_util
 
 
 class testTask:
+    api_result = {}
+    database_result = {}
+    web_ui_result = {}
+
     def __init__(self):
         logging.basicConfig(level=logging.DEBUG,
                             format='%(asctime)s %(levelname)-8s %(funcName)s %(message)s',
@@ -61,17 +64,17 @@ class testTask:
                 logging.info('Test FAIL')
                 return 'Fail'
         except TypeError as E:
-            logging.warning('SQL result is NULL for query --> %s', test_sql_query)
+            logging.warning(
+                'SQL result is NULL for query --> %s', test_sql_query)
             logging.error('Error message: %s', E.message)
             return 'BLOCKED'
 
-        logging.info('%s execution complete\n', testname)
 
     @classmethod
     def execute_test_steps(cls, api_action_address, database_object, table, test_sql_query, api_datapoint_value_toSearch, api_datapoint_key_toGet,
                            test_name="API v/s database"):
         """
-        Consolidated test steps
+        Consolidated test steps into one
         :param api_action_address: url to api
         :param database_object: object of the database class
         :param table: table name from the database to test

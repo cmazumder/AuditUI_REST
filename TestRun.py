@@ -9,8 +9,10 @@ def main():
     cycle1.test_dashboard_GMID(
         api_action_address='/dataservice/api/2/Components')
     cycle1.test_dashboard_Supported_Levels(
-        api_action_address='/dataservice/api/2/Configs') # This test is written to fail, to test the working
-    cycle1.test_dashboard_CCCE_Limit(api_action_address='/dataservice/api/2/Configs') # This test is written to be BLOCKED, to test the working
+        api_action_address='/dataservice/api/2/Configs')  # This test is written to fail, to test the working
+    # This test is written to be BLOCKED, to test the working
+    cycle1.test_dashboard_CCCE_Limit(
+        api_action_address='/dataservice/api/2/Configs')
 
     print "********************** AuditUI Test **********************\n" \
           "Test summary\n" \
