@@ -1,8 +1,11 @@
-from database.misc.misc import MiscDatabase as misc_database_class
-from database.vertex.vertex import VertexDatabase as vertex_database_class
-from test.test_step import testTask as Test
 import logging
 import sys
+from urlparse import urljoin
+
+from database.misc.misc import MiscDatabase as misc_database_class
+from database.vertex.vertex import VertexDatabase as vertex_database_class
+from setup_File import Env_variable as config_variable
+from test.test_step import testTask as Test
 
 
 class AuditUI_TestSuite:
@@ -17,7 +20,7 @@ class AuditUI_TestSuite:
         logging.basicConfig(level=logging.DEBUG,
                             format='%(asctime)s %(levelname)-8s %(funcName)s %(message)s',
                             datefmt='%a, %d %b %Y %H:%M:%S',
-                            filename='C:\LogPython\AuditUI_test1.log',
+                            filename='C:\LogPython\AuditUI_TestRun.log',
                             filemode='w')
         logging.info('Test Suite: Audit UI')
 
@@ -55,10 +58,14 @@ class AuditUI_TestSuite:
         logging.info('Runing pre-req check for %s', this_function_name)
 
         make_query = r"SELECT ComponentValue FROM [Misc].[dbo].[Component] WHERE ComponentID = 'ManufacturerIdentifier'"
+        xpath = r'//controllerdetail-partial/div/table/tbody/tr[1]/td[2]'
+        audit_ui_url = urljoin(config_variable.get("ApiURL_root"), 'AuditUI/home')
 
         execution_status = Test.execute_test_steps(api_action_address=api_action_address, database_object=self.misc_db,
-                                                   table='Component', test_sql_query=make_query, api_datapoint_value_toSearch='ManufacturerIdentifier',
-                                                   api_datapoint_key_toGet='ComponentValue', test_name=this_function_name)
+                                                   table='Component', test_sql_query=make_query,
+                                                   api_datapoint_value_toSearch='ManufacturerIdentifier',
+                                                   api_datapoint_key_toGet='ComponentValue', ui_url=audit_ui_url,
+                                                   ui_xpath_to_value=xpath, test_name=this_function_name)
 
         self.update_test_result(
             returned_result=execution_status, test_name=this_function_name)
@@ -75,10 +82,14 @@ class AuditUI_TestSuite:
         logging.info('Runing pre-req check for %s', this_function_name)
 
         make_query = r"SELECT ComponentValue FROM [Misc].[dbo].[Component] WHERE ComponentID = 'ControllerGMID'"
+        audit_ui_url = urljoin(config_variable.get("ApiURL_root"), 'AuditUI/home')
+
+        xpath = r'//controllerdetail-partial/div/table/tbody/tr[2]/td[2]'
 
         execution_status = Test.execute_test_steps(api_action_address=api_action_address, database_object=self.misc_db,
                                                    table='Component', test_sql_query=make_query, api_datapoint_value_toSearch='ControllerGMID',
-                                                   api_datapoint_key_toGet='ComponentValue', test_name=this_function_name)
+                                                   api_datapoint_key_toGet='ComponentValue', ui_url=audit_ui_url,
+                                                   ui_xpath_to_value=xpath, test_name=this_function_name)
 
         self.update_test_result(
             returned_result=execution_status, test_name=this_function_name)
@@ -96,10 +107,14 @@ class AuditUI_TestSuite:
         logging.info('Runing pre-req check for %s', this_function_name)
 
         make_query = r"SELECT ConfigID FROM [Vertex].[dbo].[Config] WHERE ConfigID='LevelCountLimit'"
+        audit_ui_url = urljoin(config_variable.get("ApiURL_root"), 'AuditUI/egminfo')
+
+        xpath = r'//datatable-body-cell/div/div/div[2]/div/div/div/div[2]/div[2]'
 
         execution_status = Test.execute_test_steps(api_action_address=api_action_address, database_object=self.misc_db,
                                                    table='Component', test_sql_query=make_query, api_datapoint_value_toSearch='LevelCountLimit',
-                                                   api_datapoint_key_toGet='Value', test_name=this_function_name)
+                                                   api_datapoint_key_toGet='Value', ui_url=audit_ui_url,
+                                                   ui_xpath_to_value=xpath, test_name=this_function_name)
 
         self.update_test_result(
             returned_result=execution_status, test_name=this_function_name)
@@ -115,10 +130,14 @@ class AuditUI_TestSuite:
         self.total_test_run += 1
         this_function_name = sys._getframe().f_code.co_name
         make_query = r"SELECT ConfigValue FROM [Vertex].[dbo].[Config] WHERE ConfigID='CCCETransferLimit'"
+        audit_ui_url = urljoin(config_variable.get("ApiURL_root"), 'AuditUI/egminfo')
+
+        xpath = r'//datatable-body-cell/div/div/div[2]/div/div/div/div[2]/div[2]'
 
         execution_status = Test.execute_test_steps(api_action_address=api_action_address, database_object=self.vertex_db,
                                                    table='Config', test_sql_query=make_query, api_datapoint_value_toSearch='CCCETransferLimit',
-                                                   api_datapoint_key_toGet='Value', test_name=this_function_name)
+                                                   api_datapoint_key_toGet='Value', ui_url=audit_ui_url,
+                                                   ui_xpath_to_value=xpath, test_name=this_function_name)
 
         self.update_test_result(
             returned_result=execution_status, test_name=this_function_name)
