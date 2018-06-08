@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec2cbb6f-e5a0-44a8-88d8-a6b99781ffaa" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/geckodriver.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestRun.py" afterPath="$PROJECT_DIR$/TestRun.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/test_step.py" afterPath="$PROJECT_DIR$/test/test_step.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/test_suite.py" afterPath="$PROJECT_DIR$/test/test_suite.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webUI/geckodriver.log" afterPath="$PROJECT_DIR$/webUI/geckodriver.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webUI/interface.py" afterPath="$PROJECT_DIR$/webUI/interface.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,10 +18,10 @@
       <file leaf-file-name="interface.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/webUI/interface.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="41" lean-forward="true" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
+            <state relative-caret-position="289">
+              <caret line="17" column="41" lean-forward="false" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
               <folding>
-                <element signature="e#0#28#0" expanded="true" />
+                <element signature="e#0#14#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -67,10 +63,8 @@
         <entry file="file://$PROJECT_DIR$/test/test_step.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
-              <caret line="86" column="55" lean-forward="true" selection-start-line="86" selection-start-column="8" selection-end-line="86" selection-end-column="55" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
+              <caret line="88" column="55" lean-forward="true" selection-start-line="88" selection-start-column="8" selection-end-line="88" selection-end-column="55" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -79,10 +73,8 @@
         <entry file="file://$PROJECT_DIR$/test/test_suite.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="329">
-              <caret line="21" column="66" lean-forward="false" selection-start-line="21" selection-start-column="66" selection-end-line="21" selection-end-column="66" />
-              <folding>
-                <element signature="e#0#66#0" expanded="true" />
-              </folding>
+              <caret line="22" column="66" lean-forward="false" selection-start-line="22" selection-start-column="66" selection-end-line="22" selection-end-column="66" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -91,10 +83,8 @@
         <entry file="file://$PROJECT_DIR$/TestRun.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="578">
-              <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#59#0" expanded="true" />
-              </folding>
+              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -625,7 +615,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528276745855</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Audit UI added to test step. But logging is broken">
+      <created>1528457328081</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1528457328081</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -679,7 +676,8 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <MESSAGE value="Refactored Vertex and VertexArch. Moved webInteraction out of api with &#10;a new name" />
     <MESSAGE value="structure of webui with selenium is in progress. Need to expand and &#10;refactor the entire solution" />
-    <option name="LAST_COMMIT_MESSAGE" value="structure of webui with selenium is in progress. Need to expand and &#10;refactor the entire solution" />
+    <MESSAGE value="Audit UI added to test step. But logging is broken" />
+    <option name="LAST_COMMIT_MESSAGE" value="Audit UI added to test step. But logging is broken" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -694,12 +692,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/webUI/interface.py</url>
-          <line>83</line>
+          <line>80</line>
           <option name="timeStamp" value="66" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TestRun.py</url>
-          <line>14</line>
+          <line>15</line>
           <option name="timeStamp" value="67" />
         </line-breakpoint>
       </breakpoints>
@@ -1044,20 +1042,16 @@
     <entry file="file://$PROJECT_DIR$/test/test_step.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="86" column="55" lean-forward="true" selection-start-line="86" selection-start-column="8" selection-end-line="86" selection-end-column="55" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
+          <caret line="88" column="55" lean-forward="true" selection-start-line="88" selection-start-column="8" selection-end-line="88" selection-end-column="55" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/test_suite.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="329">
-          <caret line="21" column="66" lean-forward="false" selection-start-line="21" selection-start-column="66" selection-end-line="21" selection-end-column="66" />
-          <folding>
-            <element signature="e#0#66#0" expanded="true" />
-          </folding>
+          <caret line="22" column="66" lean-forward="false" selection-start-line="22" selection-start-column="66" selection-end-line="22" selection-end-column="66" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1074,19 +1068,17 @@
     <entry file="file://$PROJECT_DIR$/TestRun.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
-          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#59#0" expanded="true" />
-          </folding>
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webUI/interface.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="41" lean-forward="true" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
+        <state relative-caret-position="289">
+          <caret line="17" column="41" lean-forward="false" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
